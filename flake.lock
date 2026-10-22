@@ -3,11 +3,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1792655551,
-        "narHash": "sha256-UCo7jvW8s1vkIugniFsP7LQmfLzlZETEK2RCn87U2x8=",
+        "lastModified": 1792656006,
+        "narHash": "sha256-acpMm1eyTA80maA6am5mINVpf7OQXoQ/4SD0aoJOqCo=",
         "owner": "sora-yuka",
         "repo": "config",
-        "rev": "ffc6caaa41a71a16a979997c5075ad1dda4f0a83",
+        "rev": "506e9c7a4ac5019c8cbe667da9f8ee52d610eebb",
         "type": "github"
       },
       "original": {
