@@ -21,6 +21,8 @@
     ];
 
     shellAliases = {
+      nhm = "nh os switch ~/.nixos-config -H workmachine";
+
       gi = "git init";
       gr = "git remote add origin";
       ga = "git add";
