@@ -18,6 +18,7 @@
 
     shellAliases = {
       nhm = "nh os switch ~/.nixos-config -H workmachine";
+      ndev = "nix develop --command zsh";
 
       gi = "git init";
       gr = "git remote add origin";
