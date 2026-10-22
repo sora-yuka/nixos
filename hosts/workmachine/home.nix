@@ -16,6 +16,7 @@ in
     quickshell.enable = true;
     nh = {  # nicer nixos-rebuild and garbage collector
       enable = true;
+      clean.enable = true;
       flake = "/home/copa/.nixos-config";
     };
   };
