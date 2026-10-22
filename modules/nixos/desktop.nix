@@ -6,6 +6,10 @@
   # services.displayManager.gdm.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.settings.Theme = {
+    CursorTheme = "GoogleDot-Black";
+    CursorSize = 22;
+  };
   security.polkit.enable = true;
   services.pipewire = {
     enable = true; alsa.enable = true; pulse.enable = true;
@@ -16,7 +20,7 @@
   };
   programs.qylock = {
     enable = true;
-    theme = "nier-automata";
+    theme = "last-of-us";
   };
   fonts.packages = with pkgs; [
     iosevka
