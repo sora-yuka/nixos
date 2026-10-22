@@ -56,6 +56,7 @@ in
     vscode
     postman
     swaybg
+    waypaper-engine
     nautilus
     telegram-desktop
     inputs.zen-browser.packages.${sys}.default
