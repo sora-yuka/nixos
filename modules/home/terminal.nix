@@ -17,8 +17,9 @@
    ];
 
     shellAliases = {
-      nhm = "nh os switch ~/.nixos-config -H workmachine";
-      ndev = "nix develop --command zsh";
+      nix-update = "nh os switch /etc/nixos -H workmachine";
+      refresh-flake-lock = "nix flake update --flake /etc/nixos";
+      nix-dev = "nix develop --command zsh";
 
       gi = "git init";
       gr = "git remote add origin";
@@ -36,6 +37,10 @@
     };
 
     initContent = ''
+      if [[ "$TERM_PROGRAM" == ghostty ]]; then
+        eval "fastfetch"
+      fi
+
       unsetopt nomatch
 
       bindkey '^[[1;5C' forward-word
@@ -44,10 +49,6 @@
       bindkey '^[[3;5~' kill-word
       bindkey '^[[H' beginning-of-line
       bindkey '^[[F' end-of-line
-
-      if [[ "$TERM_PROGRAM" == ghostty ]]; then
-        eval "fastfetch"
-      fi
     '';
   };
 
