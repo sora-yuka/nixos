@@ -8,6 +8,7 @@ let
 
     # You can get hash using nix-prefetch-github:
     # nix-prefetch-github [owner] [repo] --rev [rev]
+    # Or use nurl: url https://github.com/theme/url
     hash = "sha256-XVzYDwJM7Q9DvdF4ZOqayjiYpasUeMhAWWcXtnhJ0WQ=";
   };
 in
