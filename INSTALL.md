@@ -1,0 +1,109 @@
+# Installing this config
+
+Two-stage install: a quick `workmachine-lite` first, then the full `workmachine`.
+
+## 0. Before you start
+
+- Boot the NixOS minimal or graphical ISO in **UEFI** mode.
+- Push the updated repo to GitHub (or keep it on a USB stick).
+- Decide your options in `hosts/workmachine/default.nix`:
+
+```nix
+custom.nvidia = { enable = true; open = false; package = "legacy_580"; };
+custom.login  = { manager = "qylock"; qylockTheme = "enfield"; }; # or "ly"/"gdm"
+```
+
+## 1. Network and Nix settings
+
+```bash
+# Wi-Fi (skip if wired)
+sudo systemctl start wpa_supplicant
+nmcli device wifi connect "<SSID>" password "<password>"   # or use wpa_cli
+
+export NIX_CONFIG="experimental-features = nix-command flakes"
+```
+
+## 2. Partition and mount
+
+Replace `/dev/nvme0n1` with your disk. This **erases it**.
+
+```bash
+sudo parted /dev/nvme0n1 -- mklabel gpt
+sudo parted /dev/nvme0n1 -- mkpart ESP fat32 1MiB 1GiB
+sudo parted /dev/nvme0n1 -- set 1 esp on
+sudo parted /dev/nvme0n1 -- mkpart swap linux-swap 1GiB 9GiB
+sudo parted /dev/nvme0n1 -- mkpart root ext4 9GiB 100%
+
+sudo mkfs.fat -F 32 -n BOOT /dev/nvme0n1p1
+sudo mkswap -L swap /dev/nvme0n1p2
+sudo mkfs.ext4 -L nixos /dev/nvme0n1p3
+
+sudo mount /dev/disk/by-label/nixos /mnt
+sudo mkdir -p /mnt/boot
+sudo mount -o umask=0077 /dev/disk/by-label/BOOT /mnt/boot
+sudo swapon /dev/disk/by-label/swap
+```
+
+## 3. Get the config
+
+```bash
+nix-shell -p git
+git clone https://github.com/sora-yuka/nixos /mnt/etc/nixos
+cd /mnt/etc/nixos
+```
+
+## 4. Regenerate hardware config
+
+The committed `hardware-configuration.nix` has **UUIDs of the old machine**. On a new disk, regenerate it:
+
+```bash
+nixos-generate-config --root /mnt --show-hardware-config \
+  > hosts/workmachine/hardware-configuration.nix
+git add -A   # flakes only see tracked files
+```
+
+## 5. Install the lite variant
+
+```bash
+mkdir -p /mnt/tmp && export TMPDIR=/mnt/tmp   # keeps builds out of the ISO's RAM
+
+sudo nixos-install --flake /mnt/etc/nixos#workmachine-lite \
+  --no-root-passwd \
+  --option accept-flake-config true
+```
+
+`workmachine-lite` skips heavy and unfree apps (vscode, postman, browsers, ffmpeg-full, spicetify) and docs. The NVIDIA driver is still downloaded and built.
+
+## 6. Set your user password
+
+`--no-root-passwd` leaves root without a password, and `copa` has none yet either:
+
+```bash
+sudo nixos-enter --root /mnt -c 'passwd copa'
+```
+
+Then `reboot` and remove the USB stick.
+
+## 7. Switch to the full config
+
+After logging in:
+
+```bash
+cd /etc/nixos
+sudo nixos-rebuild switch --flake .#workmachine
+```
+
+Heavy apps download here. If it fails or is slow, just rerun it.
+
+Also, you can set root password using command:
+```bash
+sudo passwd root
+```
+
+## Tips
+
+- **See what will compile** before building: 
+  `nix build .#nixosConfigurations.workmachine-lite.config.system.build.toplevel --dry-run`
+- **Don't run `nix flake update` right before installing.** A fresh `nixos-unstable` commit may not be built on Hydra yet, so you'd compile instead of download.
+- **Out of memory on the ISO?** Keep `TMPDIR=/mnt/tmp` and use the swap partition (`swapon` above).
+- **Switch login screen later:** change `custom.login.manager` and rebuild.
