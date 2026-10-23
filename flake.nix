@@ -42,6 +42,16 @@
       ];
     };
 
+    # Slim variant for the first install.
+    # After first boot: nixos-rebuild --flake /etc/nixos#workmachine
+    nixosConfigurations.workmachine-lite = 
+      self.nixosConfigurations.workmachine.extendModules {
+        modules = [{
+          custom.fastInstall.enable = true;
+          home-manager.users.copa.custom.heavyApps.enable = false;
+        }];
+      };
+
     formatter.${system} = pkgs.alejandra;
   };
 }
