@@ -10,15 +10,18 @@ Two-stage install: a quick `workmachine-lite` first, then the full `workmachine`
 
 ```nix
 custom.nvidia = { enable = true; open = false; package = "legacy_580"; };
-custom.login  = { manager = "qylock"; qylockTheme = "enfield"; }; # or "ly"/"gdm"
+custom.login  = { manager = "qylock"; qylockTheme = "nier-automata"; }; # or "ly"/"gdm"
 ```
 
 ## 1. Network and Nix settings
 
 ```bash
+sudo -i    # root shell for the whole install (env vars survive, no more sudo)
+
 # Wi-Fi (skip if wired)
-sudo systemctl start wpa_supplicant
-nmcli device wifi connect "<SSID>" password "<password>"   # or use wpa_cli
+#   graphical ISO: nmcli device wifi connect "<SSID>" password "<password>"
+#   minimal ISO:   wpa_cli  ->  add_network / set_network / enable_network
+#                  (or: systemctl start wpa_supplicant first)
 
 export NIX_CONFIG="experimental-features = nix-command flakes"
 ```
@@ -28,20 +31,20 @@ export NIX_CONFIG="experimental-features = nix-command flakes"
 Replace `/dev/nvme0n1` with your disk. This **erases it**.
 
 ```bash
-sudo parted /dev/nvme0n1 -- mklabel gpt
-sudo parted /dev/nvme0n1 -- mkpart ESP fat32 1MiB 1GiB
-sudo parted /dev/nvme0n1 -- set 1 esp on
-sudo parted /dev/nvme0n1 -- mkpart swap linux-swap 1GiB 9GiB
-sudo parted /dev/nvme0n1 -- mkpart root ext4 9GiB 100%
+parted /dev/nvme0n1 -- mklabel gpt
+parted /dev/nvme0n1 -- mkpart ESP fat32 1MiB 1GiB
+parted /dev/nvme0n1 -- set 1 esp on
+parted /dev/nvme0n1 -- mkpart swap linux-swap 1GiB 9GiB
+parted /dev/nvme0n1 -- mkpart root ext4 9GiB 100%
 
-sudo mkfs.fat -F 32 -n BOOT /dev/nvme0n1p1
-sudo mkswap -L swap /dev/nvme0n1p2
-sudo mkfs.ext4 -L nixos /dev/nvme0n1p3
+mkfs.fat -F 32 -n BOOT /dev/nvme0n1p1
+mkswap -L swap /dev/nvme0n1p2
+mkfs.ext4 -L nixos /dev/nvme0n1p3
 
-sudo mount /dev/disk/by-label/nixos /mnt
-sudo mkdir -p /mnt/boot
-sudo mount -o umask=0077 /dev/disk/by-label/BOOT /mnt/boot
-sudo swapon /dev/disk/by-label/swap
+mount /dev/disk/by-label/nixos /mnt
+mkdir -p /mnt/boot
+mount -o umask=0077 /dev/disk/by-label/BOOT /mnt/boot
+swapon /dev/disk/by-label/swap
 ```
 
 ## 3. Get the config
@@ -67,7 +70,7 @@ git add -A   # flakes only see tracked files
 ```bash
 mkdir -p /mnt/tmp && export TMPDIR=/mnt/tmp   # keeps builds out of the ISO's RAM
 
-sudo nixos-install --flake /mnt/etc/nixos#workmachine-lite \
+nixos-install --flake /mnt/etc/nixos#workmachine-lite \
   --no-root-passwd \
   --option accept-flake-config true
 ```
@@ -79,7 +82,7 @@ sudo nixos-install --flake /mnt/etc/nixos#workmachine-lite \
 `--no-root-passwd` leaves root without a password, and `copa` has none yet either:
 
 ```bash
-sudo nixos-enter --root /mnt -c 'passwd copa'
+nixos-enter --root /mnt -c 'passwd copa'
 ```
 
 Then `reboot` and remove the USB stick.
