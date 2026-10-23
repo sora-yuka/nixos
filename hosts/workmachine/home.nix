@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   sys = pkgs.stdenv.hostPlatform.system;
 in
@@ -17,7 +17,7 @@ in
     nh = {  # nicer nixos-rebuild and garbage collector
       enable = true;
       clean.enable = true;
-      flake = "/home/copa/.nixos-config";
+      flake = "/etc/nixos#workmachine";
     };
   };
 
@@ -36,6 +36,7 @@ in
     nixfmt
 
     # CLI utilities
+    zip
     unzip
     tree
     ripgrep
@@ -52,20 +53,20 @@ in
     grim
     slurp
 
-    # Desktop apps
-    vscode
-    postman
+    # Desktop essentials
     swaybg
     waypaper-engine
     nautilus
+    pavucontrol
+    playerctl
+  ] ++ lib.optionals config.custom.heavyApps.enable [
+    # Heavy / unfree apps (custom.heavyApps.enable)
+    vscode
+    postman
     telegram-desktop
     inputs.zen-browser.packages.${sys}.default
     inputs.helium.packages.${sys}.default
-
-    # Audio / Media
     ffmpeg-full
-    pavucontrol
-    playerctl
     cine
   ];
 }
