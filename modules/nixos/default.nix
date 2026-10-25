@@ -1,12 +1,12 @@
 { pkgs, lib, inputs, ... }:
 
-let 
+let
   sys = pkgs.stdenv.hostPlatform.system;
 in
 {
   imports = [
     ./boot.nix ./desktop.nix ./dev.nix
-    ./fast-install.nix ./login.nix ./nvidia.nix
+    ./fast-install.nix ./login.nix
   ];
 
   nix.settings = {
@@ -39,7 +39,7 @@ in
       gstreamer gst-plugins-base gst-plugins-good
       gst-plugins-bad gst-plugins-ugly gst-libav
     ]);
-   
+
   environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (
     with pkgs.gst_all_1; [
       gstreamer gst-plugins-base gst-plugins-good

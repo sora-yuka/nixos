@@ -31,5 +31,14 @@
     package = "legacy_580";
   };
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia.modesetting.enable = true;
+
   system.stateVersion = "26.05";
 }

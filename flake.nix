@@ -48,6 +48,7 @@
       self.nixosConfigurations.workmachine.extendModules {
         modules = [{
           custom.fastInstall.enable = true;
+          custom.login.manager = "ly";
           home-manager.users.copa.custom.heavyApps.enable = false;
         }];
       };
