@@ -14,11 +14,6 @@ in
     yazi.enable = true;
     fastfetch.enable = true;
     quickshell.enable = true;
-    steam = {
-      enable = true;
-      gamescopeSession.enable = true;
-    };
-    gamemode.enable = true;
     nh = {  # nicer nixos-rebuild and garbage collector
       enable = true;
       clean.enable = true;
@@ -73,12 +68,6 @@ in
     inputs.helium.packages.${sys}.default
     ffmpeg-full
     mangohud
-    protonup
     cine
   ];
-
-  home.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-      "\${HOME}/.steam/root/compatibilitytools.d";
-  };
 }
