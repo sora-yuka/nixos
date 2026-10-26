@@ -14,14 +14,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helium.url = "github:schembriaiden/helium-browser-nix-flake";
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    qylock.url = "github:Darkkal44/qylock";
+    qylock = {
+      url = "github:Darkkal44/qylock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     dotfiles = {
       url = "github:sora-yuka/config";
@@ -44,7 +50,7 @@
 
     # Slim variant for the first install.
     # After first boot: nixos-rebuild --flake /etc/nixos#workmachine
-    nixosConfigurations.workmachine-lite = 
+    nixosConfigurations.workmachine-lite =
       self.nixosConfigurations.workmachine.extendModules {
         modules = [{
           custom.fastInstall.enable = true;
