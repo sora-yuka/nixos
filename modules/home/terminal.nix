@@ -37,6 +37,8 @@
     };
 
     initContent = ''
+      eval "$(devenv hook zsh)"  
+
       if [[ "$TERM_PROGRAM" == ghostty ]]; then
         eval "fastfetch"
       fi
