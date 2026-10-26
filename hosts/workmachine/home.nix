@@ -67,6 +67,7 @@ in
     inputs.zen-browser.packages.${sys}.default
     inputs.helium.packages.${sys}.default
     ffmpeg-full
+    discord
     mangohud
     devenv
     cine
