@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   imports = [
@@ -25,20 +25,24 @@
     users.copa = import ./home.nix;
   };
 
-  custom.nvidia = {
+  hardware.graphics = {
     enable = true;
-    open = false;
-    package = "legacy_580";
-  };
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+  };
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+    extraCompatPackages = [pkgs.proton-ge-bin];
+  };
+  programs.gamemode.enable = true;
 
   system.stateVersion = "26.05";
 }
