@@ -68,6 +68,7 @@ in
     inputs.helium.packages.${sys}.default
     ffmpeg-full
     mangohud
+    devenv
     cine
   ];
 }
