@@ -30,21 +30,19 @@ export NIX_CONFIG="experimental-features = nix-command flakes"
 
 Replace `/dev/nvme0n1` with your disk. This **erases it**.
 
+
 ```bash
-parted /dev/nvme0n1 -- mklabel gpt
-parted /dev/nvme0n1 -- mkpart ESP fat32 1MiB 1GiB
-parted /dev/nvme0n1 -- set 1 esp on
-parted /dev/nvme0n1 -- mkpart swap linux-swap 1GiB 9GiB
-parted /dev/nvme0n1 -- mkpart root ext4 9GiB 100%
+cfdisk
+# Chose three options: EFI system (vfat), Linux swap (swap) and Linux filesystem (ext4).
 
 mkfs.fat -F 32 -n BOOT /dev/nvme0n1p1
 mkswap -L swap /dev/nvme0n1p2
 mkfs.ext4 -L nixos /dev/nvme0n1p3
 
-mount /dev/disk/by-label/nixos /mnt
-mkdir -p /mnt/boot
-mount -o umask=0077 /dev/disk/by-label/BOOT /mnt/boot
-swapon /dev/disk/by-label/swap
+mount /dev/nvme0n1p3 /mnt
+mount --mkdir /dev/nvme0n1p1 /mnt/boot
+swapon /dev/nvme0n1p2
+mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 ```
 
 ## 3. Get the config
@@ -105,7 +103,7 @@ sudo passwd root
 
 ## Tips
 
-- **See what will compile** before building: 
+- **See what will compile** before building:
   `nix build .#nixosConfigurations.workmachine-lite.config.system.build.toplevel --dry-run`
 - **Don't run `nix flake update` right before installing.** A fresh `nixos-unstable` commit may not be built on Hydra yet, so you'd compile instead of download.
 - **Out of memory on the ISO?** Keep `TMPDIR=/mnt/tmp` and use the swap partition (`swapon` above).
