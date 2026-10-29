@@ -59,6 +59,14 @@
         }];
       };
 
+    nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/laptop
+        inputs.qylock.nixosModules.default
+      ];
+    };
+
     formatter.${system} = pkgs.alejandra;
   };
 }
