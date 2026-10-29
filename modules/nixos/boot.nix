@@ -22,7 +22,7 @@ in
       enable = true;
       efiSupport = true;
       device = "nodev";
-      default = "Windows Boot Manager (on /dev/sdb1)";
+      default = 2;
       useOSProber = true;
       gfxmodeEfi = "1920x1080,auto";
       gfxpayloadEfi = "keep";
