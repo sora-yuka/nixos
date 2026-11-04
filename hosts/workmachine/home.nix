@@ -69,7 +69,9 @@ in
     ffmpeg-full
     discord
     mangohud
+    gnome-font-viewer
     devenv
     cine
+    onlyoffice-desktopeditors
   ];
 }
