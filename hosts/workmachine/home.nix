@@ -71,6 +71,7 @@ in
     mangohud
     gnome-font-viewer
     devenv
+    loupe
     cine
     onlyoffice-desktopeditors
   ];
