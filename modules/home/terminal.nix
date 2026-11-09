@@ -28,7 +28,7 @@
       gps = "git push origin main";
       gpl = "git pull origin main";
 
-      ui = "uv init --no-package";
+      ui = "uv init --bare";
       ur = "uv run python";
       ua = "uv add";
       um = "uv remove";
