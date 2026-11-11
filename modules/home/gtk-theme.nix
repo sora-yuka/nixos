@@ -4,6 +4,11 @@
   gtk = {
     enable = true;
 
+    theme = {
+      name = "WhiteSur-Dark";
+      package = pkgs.whitesur-gtk-theme;
+    };
+
     iconTheme = {
       name = "Colloid";
       package = pkgs.colloid-icon-theme;
@@ -25,8 +30,10 @@
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      gtk-theme = "WhiteSur-Dark";
       cursor-theme = config.home.pointerCursor.name;
       cursor-size = config.home.pointerCursor.size;
     };
+    "org/gnome/shell/extensions/user-theme".name = "WhiteSur-Dark";
   };
 }

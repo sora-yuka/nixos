@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./git.nix ./gtk-theme.nix
+    ./git.nix ./gtk-theme.nix ./gtk-extensions.nix
     ./spicetify.nix ./terminal.nix ./vim.nix
   ];
 
