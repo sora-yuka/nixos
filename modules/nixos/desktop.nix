@@ -19,6 +19,7 @@
     maple-mono.truetype
     corefonts
     monaspace
+    inter
     maple-mono.NF  # NF stands for Nerd Font
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
