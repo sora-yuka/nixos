@@ -1,6 +1,5 @@
 { pkgs, ... }:
-
-{
+let
   apple-sf-fonts = pkgs.stdenvNoCC.mkDerivation {
     name = "apple-san-francisco-fonts";
 
@@ -18,5 +17,8 @@
       runHook postInstall
     '';
   };
+in
+{
+  fonts.packages = [ apple-sf-fonts ];
 }
 
