@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.package = with pkgs.gnomeExtensions; [
+  home.packages = with pkgs.gnomeExtensions; [
     user-themes
     blur-my-shell
   ];
