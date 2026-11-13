@@ -23,7 +23,6 @@ in
 
   xdg.configFile = {
     "niri".source = inputs.dotfiles + "/niri";
-    "quickshell".source = inputs.dotfiles + "/quickshell";
     "fastfetch".source = inputs.dotfiles + "/fastfetch";
     "ghostty".source = inputs.dotfiles + "/ghostty";
     "zsh".source = inputs.dotfiles + "/zsh";

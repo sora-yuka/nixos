@@ -3,11 +3,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1794064785,
-        "narHash": "sha256-bFzSiWqBTEyXr3GwZqUC5cNuxLzs/EB5Yvd2WHg7M34=",
+        "lastModified": 1794418675,
+        "narHash": "sha256-M1yo63W64imAt9n1/LV8JocrYz4hNWc5Z8+rQ7JUSMc=",
         "owner": "sora-yuka",
         "repo": "config",
-        "rev": "49ea977ec805d8b1bc03b4aca025f946a1c3c03a",
+        "rev": "9e5e053c9976cd32a7884a9c477937214447d346",
         "type": "github"
       },
       "original": {
@@ -113,6 +113,26 @@
         "type": "github"
       }
     },
+    "inir": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794489899,
+        "narHash": "sha256-YIq9cleuM33dKHgBzpKjibXWvWzUShlo831Ckx3SlyA=",
+        "owner": "snowarch",
+        "repo": "inir",
+        "rev": "edca6cc95c7881ba152472759ba071f4e2c9867e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "snowarch",
+        "repo": "inir",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1792502884,
@@ -172,6 +192,7 @@
         "dotfiles": "dotfiles",
         "helium": "helium",
         "home-manager": "home-manager",
+        "inir": "inir",
         "nixpkgs": "nixpkgs",
         "qylock": "qylock",
         "spicetify-nix": "spicetify-nix",
