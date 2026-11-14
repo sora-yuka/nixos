@@ -2,17 +2,11 @@
 
 {
   imports = [
-    inputs.inir.nixosModules.inir
     ./fonts.nix
   ];
 
   programs.dconf.enable = true;
   programs.niri.enable = true;
-  programs.inir = {
-    enable = true;
-    service.enable = true;
-    extraPackages = [ config.programs.niri.package ];
-  };
   security.polkit.enable = true;
   services.pipewire = {
     enable = true; alsa.enable = true; pulse.enable = true;
