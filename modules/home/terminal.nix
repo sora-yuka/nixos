@@ -19,7 +19,6 @@
     shellAliases = {
       nix-update = "nh os switch /etc/nixos -H workmachine";
       refresh-flake-lock = "nix flake update --flake /etc/nixos";
-      nix-dev = "nix develop --command zsh";
 
       gi = "git init";
       gr = "git remote add origin";
@@ -57,6 +56,6 @@
   programs.oh-my-posh = {
     enable = true;
     enableZshIntegration = true;
-    settings = builtins.fromJSON (builtins.readFile (inputs.dotfiles + "/zsh/config.json"));
+    # settings = builtins.fromJSON (builtins.readFile ("/home/copa/.config/zsh/config.json"));
   };
 }

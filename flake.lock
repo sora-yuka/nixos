@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1794751128,
-        "narHash": "sha256-NJqQmevYifn68F0+yaDn9nRpNHnjd7TaXICR3+o8ps4=",
-        "owner": "sora-yuka",
-        "repo": "config",
-        "rev": "d7711f39c1d43c0fb04b75b34061f70c2f4a81c7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sora-yuka",
-        "repo": "config",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -169,7 +153,6 @@
     },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
         "helium": "helium",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
