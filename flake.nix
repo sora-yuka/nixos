@@ -28,12 +28,7 @@
       url = "github:Darkkal44/qylock";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    dotfiles = {
-      url = "github:sora-yuka/config?shallow=1";
-      flake = false;
-    };
-  };
+ };
 
   outputs = { self, nixpkgs, ... } @ inputs:
   let

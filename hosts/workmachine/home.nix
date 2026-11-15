@@ -21,13 +21,6 @@ in
     };
   };
 
-  xdg.configFile = {
-    "niri".source = inputs.dotfiles + "/niri";
-    "fastfetch".source = inputs.dotfiles + "/fastfetch";
-    "ghostty".source = inputs.dotfiles + "/ghostty";
-    "zsh".source = inputs.dotfiles + "/zsh";
-  };
-
   home.packages = with pkgs; [
     # Nix tools
     nurl              # replaces nix-prefetch-github
