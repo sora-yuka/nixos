@@ -2,7 +2,7 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable?shallow=1";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,7 +30,7 @@
     };
 
     dotfiles = {
-      url = "github:sora-yuka/config";
+      url = "github:sora-yuka/config?shallow=1";
       flake = false;
     };
   };
