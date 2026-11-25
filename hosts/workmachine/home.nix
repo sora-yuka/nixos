@@ -36,6 +36,7 @@ in
     jq
     fzf
     timg
+    openssl
     zsh-completions
 
     # Wayland essentials

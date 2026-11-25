@@ -6,8 +6,8 @@
 }:
 
 let
-  GTK_THEME_NAME = "WhiteSur";
-  GTK_CURSOR_NAME = "GoogleDot-Blue";
+  GTK_THEME_NAME = "WhiteSur-Dark";
+  GTK_CURSOR_NAME = "GoogleDot-Black";
   GTK_CURSOR_SIZE = 22;
   GTK_ICON_NAME = "Colloid";
   GTK_DARK = true;

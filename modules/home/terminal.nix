@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   programs.zsh = {
@@ -27,12 +27,19 @@
       gps = "git push origin main";
       gpl = "git pull origin main";
 
+      di = "devenv init";
+      ds = "devenv shell";
+      du = "devenv up";
+      dd = "devenv down";
+
       ui = "uv init --bare";
       ur = "uv run python";
       ua = "uv add";
       um = "uv remove";
       us = "uv sync";
       ut = "uv tree";
+
+      c = "clear";
     };
 
     initContent = ''
@@ -56,6 +63,6 @@
   programs.oh-my-posh = {
     enable = true;
     enableZshIntegration = true;
-    # settings = builtins.fromJSON (builtins.readFile ("/home/copa/.config/zsh/config.json"));
+    settings = lib.importJSON ./zsh-themes/amro-theme.json; 
   };
 }

@@ -3,6 +3,11 @@
 {
   home.activation.githubkey = lib.hm.dag.entryAfter ["writeBoundary"] '' 
     key="$HOME/.ssh/id_ed25519_github"
+
+    if [ -f "$key" ] && [ ! -s "$key" ]; then
+      rm -f "$key" "$key.pub"
+    fi
+  
     if [ ! -f "$key" ]; then
       mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
       ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -N "" -C "feelingjeez@gmail.com" -f "$key"
